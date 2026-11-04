@@ -1,19 +1,10 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes"><title>Sentra Desk</title>
-<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="apple-touch-icon.png">
-<style>body{background:#0b0d10;color:#e8eaed;font:16px -apple-system,system-ui,sans-serif;margin:0;padding:24px}
-h1{font-size:22px}.pill{background:#f5a623;color:#000;border-radius:8px;padding:2px 8px;font-size:13px}
-#s{color:#9aa0a6;margin-top:12px}pre{white-space:pre-wrap;font-size:13px;color:#cfd3d7}</style></head>
-<body><h1>Sentra Desk · <span class="pill">PAPER</span></h1><div id="s">No data link. Open the link from your desk.</div><pre id="o"></pre>
-<script>
-const m=location.hash.match(/d=([0-9a-f]+)/);if(m){localStorage.setItem('d',m[1]);history.replaceState(null,'',location.pathname)}
-const d=localStorage.getItem('d');
-async function poll(){try{
- const r=await fetch(`https://gist.githubusercontent.com/Sentratradingbot/${d}/raw/state.json?t=${Date.now()}`,{cache:'no-store'});
- if(!r.ok)throw r.status;const j=await r.json();
- document.getElementById('s').textContent='Updated '+new Date().toLocaleTimeString();
- document.getElementById('o').textContent=JSON.stringify(j,null,2);
-}catch(e){document.getElementById('s').textContent='Desk unreachable ('+e+'), retrying'}}
-if(d){poll();setInterval(poll,15000)}
-</script></body></html>
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b0d10"><title>Sentra Desk</title>
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="stylesheet" href="app.css?v=2">
+</head><body>
+<header><div class="brand">Sentra Desk <span id="mode" class="pill paper">PAPER</span></div><div id="sync" class="muted"></div></header>
+<main id="view"></main>
+<nav id="tabs"><button data-t="home" class="on">Home</button><button data-t="agents">Agents</button><button data-t="activity">Activity</button><button data-t="account">Account</button></nav>
+<script src="app.js?v=2"></script></body></html>
