@@ -1,6 +1,6 @@
 // Sentra Desk app: reads the secret data gist (#d=<id> once, then localStorage). Read-only; commands go through Telegram.
 const USER='Sentratradingbot';const $=s=>document.querySelector(s);
-let m=location.hash.match(/d=([0-9a-f]+)/);if(m){localStorage.setItem('d',m[1]);history.replaceState(null,'',location.pathname)}
+let m=location.hash.match(/d=([0-9a-f]+)/)||location.search.match(/[?&]d=([0-9a-f]+)/);if(m){localStorage.setItem('d',m[1]);history.replaceState(null,'',location.pathname)}
 const D=localStorage.getItem('d');let S=null,ACT=[],CH=[],tab='home',route=null,err=null,lastOk=0;const COINS={};
 const raw=f=>`https://gist.githubusercontent.com/${USER}/${D}/raw/${f}?t=${Date.now()}`;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
